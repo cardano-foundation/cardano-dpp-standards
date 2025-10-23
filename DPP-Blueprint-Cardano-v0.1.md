@@ -239,9 +239,11 @@ The right approach depends on whether the product needs a stable identifier, how
 
 ---
 
-#### Approach 1: CIP-68 Datum Update (Recommended Default)
+#### Approach 1: CIP-68 Datum Update / Inline Datum Update
 
-In this approach, the product identity remains stable using CIP-68 reference tokens, while metadata is updated through datum changes. The product is represented by a reference token paired with a user token (exact label prefixes to be defined in CIP-X).
+In this approach, the product identity remains stable while metadata is updated through datum changes. The product can be represented using CIP-68 reference token patterns (reference token paired with user token) or through a simplified inline datum update mechanism.
+
+> **Note on DPP-Specific Standard:** While CIP-68 provides a proven pattern for updateable tokens, it was designed primarily for NFTs and fungible tokens. For DPP-specific use cases, a future CIP may define a tailored inline datum update standard for product passports. This would maintain the benefits of stable product identity and updateable metadata without requiring full CIP-68 token pair semantics. Teams can implement inline datum updates using Plutus validators today, with formal standardization to follow. The exact label prefixes and token structure will be defined in the CIP.
 
 **Benefits:**
 - Stable product identity across all versions (asset name never changes)
