@@ -13,6 +13,7 @@
 3. [Decision Matrix](#3-decision-matrix)
 4. [Solution Patterns](#4-solution-patterns)
    - [4.1 Static Passport Anchor](#41-static-passport-anchor)
+   - [4.1.1 Handling Data Updates (Versioning)](#411-handling-data-updates-versioning)
    - [4.2 Anchored Proof (Privacy-preserving proof)](#42-anchored-proof-privacy-preserving-proof)
    - [4.3 Event Log (Append-only lifecycle history)](#43-event-log-append-only-lifecycle-history)
    - [4.4 High Throughput (Fast scanning for millions of products)](#44-high-throughput-fast-scanning-for-millions-of-products)
@@ -226,42 +227,91 @@ flowchart LR
 4. **Verify fingerprint** - Portal checks that the data fingerprint matches what's recorded on Cardano
 5. **Display results** - Show product information with a "✓ Verified on Cardano" badge if fingerprints match
 
+---
 
-#### C. Handling Data Updates (Versioning)
+### 4.1.1 Handling Data Updates (Versioning)
 
 Even though the Static Passport Anchor pattern is designed for rarely or never updated scenarios, DPP data may still need to change over time due to regulatory updates, supplier changes, or corrections. When updates are required, versioning can be implemented using Cardano native assets.
 
-**Two Versioning Approaches:**
+**Three Versioning Approaches:**
 
-**Approach 1: Burn and Mint**
+The right approach depends on whether the product needs a stable identifier, how frequently updates occur, and whether Plutus smart contracts are acceptable for the implementation.
+
+---
+
+#### Approach 1: CIP-68 Datum Update (Recommended Default)
+
+In this approach, the product identity remains stable using CIP-68 reference tokens, while metadata is updated through datum changes. The product is represented by a reference token paired with a user token (exact label prefixes to be defined in CIP-X).
+
+**Benefits:**
+- Stable product identity across all versions (asset name never changes)
+- Efficient updates through datum modifications (no minting/burning required)
+- Prevents ADA accumulation (single UTxO persists across versions)
+- Well-suited for frequent updates
+- User token serves as permanent product identifier for wallets and marketplaces
+- Plutus validator enforces version progression and update authorization
+
+**Considerations:**
+- Requires Plutus validator (more complex than native script)
+- Must maintain proper version sequencing in validator logic
+- Slightly higher implementation complexity compared to native script approaches
+- Label prefix assignment to be defined in CIP-X (may reuse existing CIP-68 labels or define DPP-specific labels)
+
+---
+
+#### Approach 2: Burn and Mint
 
 In this approach, the existing DPP native asset is burned and a new asset is minted with the next version number and updated data.
 
 **Benefits:**
 - Unlocks ADA that was locked in the UTxO containing the burned token
 - Provides a clean version transition with only the current version active
-- With CIP-68 tokens, additional validation rules and checks can be enforced during burn/mint operations to ensure proper version progression
+- Can be implemented with simple native script (Plutus optional)
+- Clear semantics: only one version exists at any time
+- Maintains NFT property (supply = 1) throughout lifecycle
 
 **Considerations:**
 - Requires transaction to burn old asset and mint new one
-- Must maintain proper version sequencing in validator logic
+- Must maintain proper version sequencing in minting policy
+- Higher transaction cost for frequent updates (each update requires mint/burn)
+- Need to hold/access the previous version token to perform update
 
-**Approach 2: Mint Only (No Burn)**
+---
 
-In this approach, a new DPP native asset is minted with the next version number without burning previous versions.
+#### Approach 3: Mint Only (Version History)
+
+In this approach, each product version is minted as a separate NFT without burning previous versions. This preserves complete version history on-chain with all versions coexisting as separate tokens.
 
 **Benefits:**
-- Preserves complete version history on-chain
+- Preserves complete version history on-chain with separate tokens
+- Each version is immutable (no updates needed)
 - Simpler transaction flow (only minting required)
 - Allows querying historical versions if needed
+- Natural audit trail of all changes over time
 
 **Considerations:**
-- DPP native assets for multiple versions co-exist on-chain
-- Minimum ADA remains locked in UTxOs holding these DPP native assets or tokens
-- Requires clear mechanism to identify the "current" version (e.g., highest version number)
+- Multiple DPP native assets coexist on-chain (one per version)
+- Minimum ADA locked in multiple UTxOs (one per version)
 - May accumulate locked ADA over many version updates
+- Requires clear mechanism to identify the "current" version (e.g., highest version number)
+- Need clear asset naming convention to associate versions with product (to be defined in CIP-X). Example convention: `<gtin>-v1`, `<gtin>-v2`, `<gtin>-v3`
 
-> **Note:** These versioning approaches are not limited to Static Passport Anchor. They apply to any pattern in this blueprint where DPP native assets need versioning. Teams using Anchored Proof, Event Log, or High Throughput patterns should evaluate the same burn-and-mint vs. mint-only trade-offs based on their specific update frequency and ADA liquidity requirements.
+---
+
+**Comparison Summary:**
+
+| Aspect | CIP-68 Datum Update | Burn and Mint | Mint Only (Version History) |
+|--------|-------------------|--------------|------------------|
+| Product identity | Stable | Stable | Multiple versions |
+| Update mechanism | Datum change | Burn + mint new | Mint new version |
+| Smart contract | Plutus required | Optional | Optional |
+| ADA efficiency | One UTxO persists | Unlocks on update | Accumulates UTxOs |
+| Implementation | Medium complexity | Low-medium complexity | Low complexity |
+| Version history | Via datum/blockchain history | Via blockchain history | All versions on-chain |
+| Best for | Frequent updates | Infrequent updates with ADA recovery | Immutable version history preservation |
+
+
+> **Note:** These versioning approaches are not limited to Static Passport Anchor. They apply to any pattern in this blueprint where DPP native assets need versioning. Teams using Anchored Proof, Event Log, or High Throughput patterns should evaluate these approaches based on their specific update frequency, ADA liquidity requirements, and whether stable product identity is needed.
 
 ---
 
