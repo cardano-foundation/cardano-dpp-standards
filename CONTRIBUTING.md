@@ -132,8 +132,17 @@ Use conventional commits:
 - Follow language-specific conventions
 
 ## Working Group
+The working group consists of **companies actively implementing DPP solutions on Cardano** in production or advanced pilot stages.
 
-**Meetings**: 60 minutes, every 15 days (two sessions: morning and afternoon to accommodate all timezones)
+#### What Working Group Members Do:
+
+- Share implementation experiences and challenges
+- Influence architectural direction
+- Provide feedback on community contributions
+- Participate in monthly technical Q&A sessions (optional but encouraged)
+- Collaborate on standards alignment
+
+**Meetings**: 60 minutes, once per month
 
 **To Join**: Open an issue titled "Working Group Participation Request" with your organization, role, industry focus, and implementation status.
 
@@ -141,7 +150,7 @@ Use conventional commits:
 
 - **Initial review**: 5 business days
 - **Technical review**: 7-10 business days
-- **Working group review**: Next bi-weekly meeting for major changes
+- **Working group review**: Next monthly meeting for major changes
 
 **Criteria**: ESPR alignment, practical value, code quality, documentation standards
 
