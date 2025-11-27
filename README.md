@@ -18,8 +18,13 @@ The challenge? Supply chains involve multiple competing organizations without a 
 
 This repository provides a comprehensive blueprint for implementing Digital Product Passports on Cardano—a blockchain platform uniquely positioned for enterprise DPP requirements through its energy efficiency (99.9% more efficient than proof-of-work chains), predictable low costs, and formal verification capabilities.
 
+- **Solution Patterns** with cost analysis, code examples, and implementation guides
+- **Industry Personas** mapping business needs to technical solutions
+- **Decision Framework** for pattern selection
+- **DPP Cardano Problem Statement** [submitted](https://github.com/cardano-foundation/CIPs/pull/1114) for community review
+
 **Living Document:**  
-This repository is actively maintained by a working group of companies implementing DPP solutions on Cardano. The group meets every 15 days to share learnings, address challenges, and refine best practices. Content is continuously updated based on real-world implementation feedback and community input.
+This repository is actively maintained by a working group of companies implementing DPP solutions on Cardano. The group meets monthly for technical Q&A sessions to address implementation challenges, share learnings, and refine best practices. Content is continuously updated based on real-world feedback and community input.
 
 ---
 
@@ -131,7 +136,7 @@ A modular library of architectural patterns with complete implementation guidanc
 - Version: 0.1 Draft (WIP)  
 - Status: Open for community feedback and contributions
 
-### Working Group Members (meeting bi-weekly):
+### Working Group Members (meeting monthly):
 
 - Plastiks.io – Recyclable/recovery solutions  
 - Tokenance – Complete DPP solution provider (luxury watch integration)  
@@ -145,7 +150,7 @@ A modular library of architectural patterns with complete implementation guidanc
 
 ## Join the Working Group
 
-The DPP on Cardano working group meets every 15 days to:
+The DPP on Cardano working group meets once per months to:
 
 - Share implementation experiences and challenges  
 - Discuss emerging regulatory requirements  
@@ -153,6 +158,7 @@ The DPP on Cardano working group meets every 15 days to:
 - Coordinate ecosystem development  
 - Align on standards and interoperability
 
+To Join: Open an issue titled "Working Group Participation Request" with your organization, role, industry focus, and implementation status.
 ## Contributing
 
 We welcome contributions in:
