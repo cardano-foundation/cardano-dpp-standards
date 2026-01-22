@@ -34,6 +34,7 @@ Digital Product Passports are becoming mandatory under EU regulation to support:
 The ESPR affects industries including textiles, electronics, batteries, construction materials, furniture, and more, impacting millions of businesses globally. First implementations begin in 2026 for batteries, followed by textiles in 2027, with other sectors phasing in through 2030.
 
 DPP implementations must integrate with existing global product identification systems, particularly GS1 standards (GTINs for product identification, Digital Link for web-based resolution, and EPCIS for event tracking). This integration is essential for interoperability with existing supply chain infrastructure.
+DPP implementations must support the EU DPP Central Registry. This involves the mandatory submission of unique identifiers (UIDs) and data carrier identifiers to a centralized EU portal.
 
 Additionally, the European standardization body CEN-CENELEC Joint Technical Committee 24 (JTC 24) is developing technical standards for DPP data models and interoperability. While these standards are still in development, DPP implementations on Cardano must be designed for compatibility with emerging EU-wide technical specifications.
 
@@ -43,7 +44,7 @@ While Cardano provides foundational capabilities through CIP-25 and CIP-68 metad
 
 - Standardized data schemas for product lifecycle information
 - Guidance on linking physical products (GTINs, QR codes) to on-chain identities
-- Reference architectures for different implementation patterns (static passports, event logs, high-throughput registration, privacy-preserving proofs)
+- Reference architectures for different implementation patterns (static passports, event logs, high-throughput and batch/rollup registration, privacy-preserving proofs)
 - Established approaches for multi-party coordination across supply chains
 - Validation frameworks for regulatory compliance claims
 
@@ -186,6 +187,7 @@ Consumers scan product QR codes to verify sustainability claims using standard s
 **Physical-Digital Linking:**
 
 - Should product identifiers (GTINs) be plaintext or hashed on-chain?
+- Map GS1 Digital Links to Decentralized Identifiers for holding verifiable credentials																					   
 
 **Scalability and Transaction Cost Management:**
 
@@ -257,4 +259,3 @@ Consumers scan product QR codes to verify sustainability claims using standard s
 ## Copyright
 
 This CPS is licensed under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/legalcode).
-
