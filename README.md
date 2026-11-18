@@ -2,7 +2,7 @@
 
 ## The Problem
 
-The EU Ecodesign Regulation (ESPR) mandates Digital Product Passports (DPP) for many industries starting February 2027, with penalties up to 4% of annual turnover for non-compliance. Companies must provide transparent, verifiable product information—materials, origin, manufacturing details, usage history, and disposal guidance—throughout entire supply chains.
+The EU Ecodesign for Sustainable Products Regulation (ESPR) mandates Digital Product Passports (DPP) across many product categories, with the first mandatory passports (certain batteries, under the Batteries Regulation) due from 18 February 2027. Other sectors phase in through product-specific delegated acts. Penalties for non-compliance are set by each member state and must be effective, proportionate and dissuasive. Turnover-based fines on the scale seen under GDPR (4%) are a useful benchmark for the risk involved. Companies must provide transparent, verifiable product information such as, materials, origin, manufacturing details, usage history, and disposal guidance throughout entire supply chains.
 
 The challenge? Supply chains involve multiple competing organizations without a central authority: manufacturers, suppliers, distributors, recyclers, and regulators. Traditional centralized databases can't provide:
 
@@ -11,6 +11,8 @@ The challenge? Supply chains involve multiple competing organizations without a 
 - Tamper-proof records for regulatory audits and anti-counterfeiting  
 - Cross-border interoperability for global supply chains  
 - Privacy-respecting transparency (disclose only what's needed, when needed)
+
+See [Regulatory & Standards References](#regulatory--standards-references) for the regulations, EU timelines and CEN-CENELEC standards behind this work.
 
 ---
 
@@ -21,10 +23,21 @@ This repository provides a comprehensive blueprint for implementing Digital Prod
 - **Solution Patterns** with cost analysis, code examples, and implementation guides
 - **Industry Personas** mapping business needs to technical solutions
 - **Decision Framework** for pattern selection
-- **DPP Cardano Problem Statement** [submitted](https://github.com/cardano-foundation/CIPs/pull/1114) for community review
+- **DPP Cardano Problem Statement** – [CPS-0035](#cardano-problem-statement-cps-0035), assigned a number and in review
 
 **Living Document:**  
-This repository is actively maintained by a working group of companies implementing DPP solutions on Cardano. The group meets monthly for technical Q&A sessions to address implementation challenges, share learnings, and refine best practices. Content is continuously updated based on real-world feedback and community input.
+This repository is maintained by a working group of companies implementing DPP solutions on Cardano. The group meets monthly for technical Q&A sessions to address implementation challenges, share learnings, and refine best practices. Content is continuously updated based on real-world feedback and community input.
+
+---
+
+## Cardano Problem Statement (CPS-0035)
+
+The problem statement for DPP on Cardano has been assigned **CPS-0035: Digital Product Passports** and is in the Cardano Improvement Proposal process. It is maintained in the CIPs repository rather than here:
+
+- Discussion and review: [cardano-foundation/CIPs PR #1114](https://github.com/cardano-foundation/CIPs/pull/1114)
+- Latest text: [CPS-0035/README.md](https://github.com/david-a-clark/CIPs/blob/master/CPS-0035/README.md)
+
+<!-- Once PR #1114 is merged, replace the "Latest text" link with https://cips.cardano.org/cps/CPS-0035 -->
 
 ---
 
@@ -136,21 +149,23 @@ A modular library of architectural patterns with complete implementation guidanc
 - Version: 0.1 Draft (WIP)  
 - Status: Open for community feedback and contributions
 
-### Working Group Members (meeting monthly):
+### Working Group Members
+
+The working group meets monthly. Organisations currently listed as members:
 
 - Plastiks.io – Recyclable/recovery solutions  
 - Tokenance – Complete DPP solution provider (luxury watch integration)  
 - Blazar Labs – Textile industry DPP (Moldova vertical expertise)  
 - Zengate Global – Traceability platforms  
 - Agrow Labs – Agricultural traceability (Official CF Partner)  
-- LW3 – Blockchain-based DPP expansion (Venture Hub Participant)  
+- LW3 – Blockchain-based DPP expansion  
 - Vetrii – Vehicle and battery tokenization through blockchain-based smart passports
 
 ---
 
 ## Join the Working Group
 
-The DPP on Cardano working group meets once per months to:
+The DPP on Cardano working group meets monthly to:
 
 - Share implementation experiences and challenges  
 - Discuss emerging regulatory requirements  
@@ -159,6 +174,53 @@ The DPP on Cardano working group meets once per months to:
 - Align on standards and interoperability
 
 To Join: Open an issue titled "Working Group Participation Request" with your organization, role, industry focus, and implementation status.
+
+---
+
+## Regulatory & Standards References
+
+The key regulations, standards and EU resources this work aligns with. These are also cited in [CPS-0035](#cardano-problem-statement-cps-0035).
+
+### EU regulation & timelines
+
+- [Regulation (EU) 2024/1781 – ESPR](https://eur-lex.europa.eu/eli/reg/2024/1781/oj/eng): the Ecodesign for Sustainable Products Regulation, the framework for DPPs across product categories
+- [Regulation (EU) 2023/1542 – Batteries Regulation](https://eur-lex.europa.eu/eli/reg/2023/1542/oj): battery passports mandatory from 18 February 2027 for EV, light-transport (e-bike, e-scooter) and industrial batteries above 2 kWh
+- [European Commission – Digital Product Passport & indicative timeline](https://single-market-economy.ec.europa.eu/single-market/digital-product-passport_en#dpp-timeline): sector roll-out as delegated acts are adopted
+- [EU DPP Registry](https://single-market-economy.ec.europa.eu/single-market/digital-product-passport/dpp-registry_en): live since 20 July 2026, with a public testing environment; holds identifiers and registration metadata, while passport content stays with the economic operator or DPP service provider
+- [European Parliament study (2024)](https://www.europarl.europa.eu/RegData/etudes/STUD/2024/757808/EPRS_STU(2024)757808_EN.pdf)
+
+### European DPP standards (CEN-CENELEC JTC 24)
+
+All eight "Digital Product Passport – Framework and System" standards, developed under Standardisation Request M/604, are published ([CEN-CENELEC listing](https://standards.cencenelec.eu/ords/f?p=205:32:::::FSP_ORG_ID,FSP_LANG_ID:3342699,25&cs=1FC22FDE02FD51137ADC6BE8CA4E10E8F)):
+
+| Standard | Scope |
+|---|---|
+| EN 18216 | Data exchange protocols |
+| EN 18219 | Unique identifiers |
+| EN 18220 | Data carriers (e.g. QR codes) |
+| EN 18221 | Data storage, archiving and persistence |
+| EN 18222 | APIs |
+| EN 18223 | System interoperability |
+| EN 18239 | Access rights, information security and business confidentiality |
+| EN 18246 | Data authentication, reliability and integrity |
+
+The first six are cited as harmonised standards under Commission Implementing Decision (EU) 2026/1736; see the Commission's timeline for the remaining two.
+
+### Reference architecture & EU initiatives
+
+- [CIRPASS-2](https://cirpass2.eu/): EU-funded DPP reference architecture (D4.1 v1.1); recommends immutable passport records with timestamped updates, and an HTTP + Verifiable Credential model with DIDs as an optional overlay
+
+### Identification & data standards
+
+- [GS1 Digital Link](https://www.gs1.org/standards/gs1-digital-link): resolves product identifiers (GTINs) from QR/NFC scans to online information
+- [GS1 EPCIS 2.0](https://www.gs1.org/standards/epcis) (ISO/IEC 19987): supply chain event capture
+- [W3C Verifiable Credentials 2.0](https://www.w3.org/TR/vc-data-model-2.0/) and [SD-JWT (RFC 9901)](https://www.rfc-editor.org/info/rfc9901/): carrying the passport and selective disclosure of fields
+
+### Cardano standards 
+
+- [CIP-25](https://cips.cardano.org/cip/CIP-0025) and [CIP-68](https://cips.cardano.org/cip/CIP-0068): Cardano token/NFT metadata standards (CIP-68 allows structured updates via datum)
+---
+
 ## Contributing
 
 We welcome contributions in:
